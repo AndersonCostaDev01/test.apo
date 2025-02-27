@@ -6,7 +6,6 @@ study to master the development of APIs with db prisma
 
 - Node.js 18+ and npm
 - PostgreSQL database
-- User register and user lister
 
 ## Get started
 

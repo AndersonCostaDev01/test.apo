@@ -1,10 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET() {
-  return NextResponse.json({
-    name: "John Doe",
-    age: 30,
-    email: "lCt4d@example.com",
-    password: "secret",
-  });
+  try {
+    const users = await prisma.user.findMany();
+
+    return NextResponse.json(users, { status: 200 });
+  } catch (error: any) {
+    console.error("Erro ao buscar usuários:", error);
+
+    return NextResponse.json(
+      { error: error.message || "Erro ao buscar usuários" },
+      { status: 500 }
+    );
+  }
 }
